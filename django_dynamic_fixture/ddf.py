@@ -288,8 +288,6 @@ class DynamicFixture(object):
 
     def _process_foreign_key(self, model_class, field, persist_dependencies):
         "Returns auto-generated value for a field ForeignKey or OneToOneField."
-        if field_is_a_parent_link(field):
-            return None
         next_model = get_related_model(field)
         occurrences = self.model_path.count(next_model)
         if occurrences >= self.number_of_laps:
@@ -345,6 +343,8 @@ class DynamicFixture(object):
             except Exception as e:
                 raise InvalidConfigurationError(get_unique_field_name(field), e), None, sys.exc_info()[2]
         else:
+            if field_is_a_parent_link(field):
+                return
             data = self._process_field_with_default_fixture(field, model_class, persist_dependencies)
 
         if is_file_field(field) and data:

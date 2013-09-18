@@ -129,9 +129,7 @@ def get_related_model(field):
 
 
 def field_is_a_parent_link(field):
-    # FIXME
-    #return hasattr(field, 'rel') and hasattr(field.rel, 'parent_link') and field.rel.parent_link
-    return hasattr(field, 'parent_link') and field.parent_link
+    return hasattr(field, 'rel') and hasattr(field.rel, 'parent_link') and field.rel.parent_link
 
 
 def field_has_choices(field):

@@ -127,8 +127,7 @@ class DjangoHelperFieldsTest(TestCase):
             o2o_with_parent_link = models.OneToOneField(ModelParent, parent_link=True, related_name='my_custom_ref_x')
         class Model4FieldIsParentLink2(ModelParent):
             o2o_without_parent_link = models.OneToOneField(ModelParent, parent_link=False, related_name='my_custom_ref_y')
-        # FIXME
-        #self.assertEquals(True, field_is_a_parent_link(get_field_by_name_or_raise(Model4FieldIsParentLink, 'o2o_with_parent_link')))
+        self.assertEquals(True, field_is_a_parent_link(get_field_by_name_or_raise(Model4FieldIsParentLink, 'o2o_with_parent_link')))
         self.assertEquals(False, field_is_a_parent_link(get_field_by_name_or_raise(Model4FieldIsParentLink2, 'o2o_without_parent_link')))
 
     def test_field_has_choices(self):
