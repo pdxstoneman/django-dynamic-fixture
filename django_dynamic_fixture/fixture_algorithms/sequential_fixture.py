@@ -153,3 +153,12 @@ class StaticSequentialDataFixture(SequentialDataFixture):
             return self.filler.next(key)
         else:
             return self.filler.current(key)
+
+class VerboseSequentialDataFixture(SequentialDataFixture):
+    def charfield_config(self, field, key):
+        data = super(VerboseSequentialDataFixture, self).charfield_config(field, key)
+        data = key + data
+        if field.max_length:
+            data = data[-field.max_length:]
+        return data
+    

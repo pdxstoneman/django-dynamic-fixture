@@ -10,7 +10,7 @@ from django.conf import settings
 from django.core.urlresolvers import get_mod_func
 from django.utils.importlib import import_module
 
-from django_dynamic_fixture.fixture_algorithms.sequential_fixture import SequentialDataFixture, StaticSequentialDataFixture, GlobalSequentialDataFixture
+from django_dynamic_fixture.fixture_algorithms.sequential_fixture import SequentialDataFixture, StaticSequentialDataFixture, GlobalSequentialDataFixture, VerboseSequentialDataFixture
 from django_dynamic_fixture.fixture_algorithms.random_fixture import RandomDataFixture
 
 
@@ -34,6 +34,7 @@ try:
     INTERNAL_DATA_FIXTURES = {'sequential': SequentialDataFixture(),
                               'static_sequential': StaticSequentialDataFixture(),
                               'global_sequential': GlobalSequentialDataFixture(),
+                              'verbose_sequential': VerboseSequentialDataFixture(),
                               'random': RandomDataFixture()}
     if hasattr(settings, 'DDF_DEFAULT_DATA_FIXTURE'):
         if settings.DDF_DEFAULT_DATA_FIXTURE in INTERNAL_DATA_FIXTURES.keys():

@@ -6,7 +6,7 @@ from django.test import TestCase
 
 from django_dynamic_fixture import global_settings
 from django_dynamic_fixture.fixture_algorithms.sequential_fixture import SequentialDataFixture, \
-    StaticSequentialDataFixture
+    StaticSequentialDataFixture, VerboseSequentialDataFixture
 from django_dynamic_fixture.fixture_algorithms.random_fixture import RandomDataFixture
 
 
@@ -39,6 +39,10 @@ class DDF_DEFAULT_DATA_FIXTURE_TestCase(AbstractGlobalSettingsTestCase):
         conf.settings.DDF_DEFAULT_DATA_FIXTURE = 'static_sequential'
         reload(global_settings)
         self.assertEquals(StaticSequentialDataFixture, type(global_settings.DDF_DEFAULT_DATA_FIXTURE))
+        
+        conf.settings.DDF_DEFAULT_DATA_FIXTURE = 'verbose_sequential'
+        reload(global_settings)
+        self.assertEquals(VerboseSequentialDataFixture, type(global_settings.DDF_DEFAULT_DATA_FIXTURE))
 
     def test_may_be_a_path_to_a_custom_data_fixture(self):
         conf.settings.DDF_DEFAULT_DATA_FIXTURE = 'django_dynamic_fixture.tests.test_global_settings.CustomDataFixture'
