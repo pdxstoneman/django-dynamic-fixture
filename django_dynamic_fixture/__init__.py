@@ -9,7 +9,7 @@ from django_dynamic_fixture.ddf import DynamicFixture, Copier, DDFLibrary, \
     set_pre_save_receiver, set_post_save_receiver
 from django_dynamic_fixture.django_helper import print_field_values
 from django_dynamic_fixture.fixture_algorithms.sequential_fixture import SequentialDataFixture, \
-    StaticSequentialDataFixture
+    StaticSequentialDataFixture, VerboseSequentialDataFixture
 from django_dynamic_fixture.global_settings import DDF_DEFAULT_DATA_FIXTURE, DDF_FILL_NULLABLE_FIELDS, DDF_NUMBER_OF_LAPS, \
                                                     DDF_IGNORE_FIELDS, DDF_VALIDATE_MODELS, DDF_VALIDATE_ARGS, DDF_USE_LIBRARY, \
                                                     DDF_DEBUG_MODE
