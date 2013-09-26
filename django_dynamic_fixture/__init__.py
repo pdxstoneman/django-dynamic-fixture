@@ -10,10 +10,6 @@ from django_dynamic_fixture.ddf import DynamicFixture, Copier, DDFLibrary, \
 from django_dynamic_fixture.django_helper import print_field_values
 from django_dynamic_fixture.fixture_algorithms.sequential_fixture import SequentialDataFixture, \
     StaticSequentialDataFixture, VerboseSequentialDataFixture
-from django_dynamic_fixture.global_settings import DDF_DEFAULT_DATA_FIXTURE, DDF_FILL_NULLABLE_FIELDS, DDF_NUMBER_OF_LAPS, \
-                                                    DDF_IGNORE_FIELDS, DDF_VALIDATE_MODELS, DDF_VALIDATE_ARGS, DDF_USE_LIBRARY, \
-                                                    DDF_DEBUG_MODE
-
 
 LOOKUP_SEP = '__'
 
@@ -38,6 +34,10 @@ def fixture(**kwargs):
     DynamicFixture factory: It instantiate a DynamicFixture using global configurations.
     Same as F(...)
     """
+    from django_dynamic_fixture.global_settings import DDF_DEFAULT_DATA_FIXTURE, DDF_FILL_NULLABLE_FIELDS, DDF_NUMBER_OF_LAPS, \
+                                                        DDF_IGNORE_FIELDS, DDF_VALIDATE_MODELS, DDF_VALIDATE_ARGS, DDF_USE_LIBRARY, \
+                                                        DDF_DEBUG_MODE
+    
     kwargs = look_up_alias(**kwargs)
     f = DynamicFixture(data_fixture=kwargs.pop('data_fixture', DDF_DEFAULT_DATA_FIXTURE),
                        fill_nullable_fields=kwargs.pop('fill_nullable_fields', DDF_FILL_NULLABLE_FIELDS),
