@@ -424,6 +424,8 @@ class DynamicFixture(object):
         @named_shelve: restore configuration saved in DDF library with a name.
         @persist_dependencies: tell if internal dependencies will be saved in the database or not.
         """
+        from django_dynamic_fixture.global_settings import DDF_IGNORE_FIELDS
+        
         if self.debug_mode:
             LOGGER.debug('>>> [%s] Generating instance.' % get_unique_model_name(model_class))
         configuration = self._configure_params(model_class, shelve, named_shelve, **kwargs)
@@ -433,6 +435,9 @@ class DynamicFixture(object):
         for field in get_fields_from_model(model_class):
             if is_key_field(field) and 'id' not in configuration: continue
             if field.name in self.ignore_fields: continue
+            if field.name in DDF_IGNORE_FIELDS and field.name not in configuration: continue
+            if ("%s.%s.%s" % (model_class._meta.app_label, model_class._meta.module_name,field.name) in DDF_IGNORE_FIELDS 
+                and field.name not in configuration): continue
             self.set_data_for_a_field(model_class, instance, field, persist_dependencies=persist_dependencies, **configuration)
         number_of_pending_fields = len(self.pending_fields)
         # For Copier fixtures: dealing with pending fields that need to receive values of another fields.
